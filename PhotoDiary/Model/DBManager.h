@@ -10,4 +10,11 @@
 
 @interface DBManager : NSObject
 
+@property (nonatomic, strong) NSMutableArray *arrColumnNames;
+@property (nonatomic) int affectedRows;
+@property (nonatomic) long long lastInsertedRowID;
+
+-(NSArray *)loadData:(NSString *)query;
+-(void)executeQuery:(NSString *)query;
+
 @end

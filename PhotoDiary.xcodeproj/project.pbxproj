@@ -17,6 +17,7 @@
 		F6A861D6212DBBC900B4920F /* ImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A861D5212DBBC900B4920F /* ImagesViewController.m */; };
 		F6A861DA212DC73900B4920F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F6A861D9212DC73800B4920F /* libsqlite3.tbd */; };
 		F6A861E1212DC89500B4920F /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A861E0212DC89500B4920F /* DBManager.m */; };
+		F6A861E3212DF15C00B4920F /* PhotoDiary.db in Resources */ = {isa = PBXBuildFile; fileRef = F6A861E2212DF15C00B4920F /* PhotoDiary.db */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		F6A861D9212DC73800B4920F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		F6A861DF212DC89500B4920F /* DBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		F6A861E0212DC89500B4920F /* DBManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
+		F6A861E2212DF15C00B4920F /* PhotoDiary.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = PhotoDiary.db; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 		F6182262212C100800BDBBF1 = {
 			isa = PBXGroup;
 			children = (
+				F6A861E2212DF15C00B4920F /* PhotoDiary.db */,
 				F618226D212C100800BDBBF1 /* PhotoDiary */,
 				F6182286212C100D00BDBBF1 /* PhotoDiaryTests */,
 				F6182291212C100D00BDBBF1 /* PhotoDiaryUITests */,
@@ -270,6 +273,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6A861E3212DF15C00B4920F /* PhotoDiary.db in Resources */,
 				F6182278212C100C00BDBBF1 /* Assets.xcassets in Resources */,
 				F6182276212C100900BDBBF1 /* Main.storyboard in Resources */,
 			);
