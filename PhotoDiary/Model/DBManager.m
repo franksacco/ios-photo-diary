@@ -23,12 +23,12 @@
 
 @implementation DBManager
 
--(instancetype)initWithDatabaseFilename: (NSString *)dbFilename{
+-(instancetype)init {
     self = [super init];
     if (self) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        self.documentsDirectory = [paths objectAtIndex:0];
-        self.databaseFilename = dbFilename;
+        _documentsDirectory = [paths objectAtIndex:0];
+        _databaseFilename = @"PhotoDiary.db";
         [self copyDatabaseIntoDocumentsDirectory];
     }
     return self;

@@ -14,10 +14,13 @@
 		F618227E212C100C00BDBBF1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F618227D212C100C00BDBBF1 /* main.m */; };
 		F6182288212C100D00BDBBF1 /* PhotoDiaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F6182287212C100D00BDBBF1 /* PhotoDiaryTests.m */; };
 		F6182293212C100D00BDBBF1 /* PhotoDiaryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F6182292212C100D00BDBBF1 /* PhotoDiaryUITests.m */; };
-		F6A861D6212DBBC900B4920F /* ImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A861D5212DBBC900B4920F /* ImagesViewController.m */; };
+		F6520A952130A81600BD2EFF /* PhotoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6520A942130A81600BD2EFF /* PhotoViewCell.m */; };
 		F6A861DA212DC73900B4920F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F6A861D9212DC73800B4920F /* libsqlite3.tbd */; };
 		F6A861E1212DC89500B4920F /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A861E0212DC89500B4920F /* DBManager.m */; };
 		F6A861E3212DF15C00B4920F /* PhotoDiary.db in Resources */ = {isa = PBXBuildFile; fileRef = F6A861E2212DF15C00B4920F /* PhotoDiary.db */; };
+		F6AF246D212EA35100F974C3 /* PhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6AF246C212EA35100F974C3 /* PhotosViewController.m */; };
+		F6B1C50D21303CEA00A9103E /* AlbumsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1C50C21303CEA00A9103E /* AlbumsViewController.m */; };
+		F6B1C50F2130521B00A9103E /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B1C50E2130521B00A9103E /* Photos.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,12 +56,17 @@
 		F618228E212C100D00BDBBF1 /* PhotoDiaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoDiaryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6182292212C100D00BDBBF1 /* PhotoDiaryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoDiaryUITests.m; sourceTree = "<group>"; };
 		F6182294212C100D00BDBBF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F6A861D5212DBBC900B4920F /* ImagesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagesViewController.m; sourceTree = "<group>"; };
-		F6A861D7212DBBF200B4920F /* ImagesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImagesViewController.h; sourceTree = "<group>"; };
+		F6520A9121307B1A00BD2EFF /* PhotoViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoViewCell.h; sourceTree = "<group>"; };
+		F6520A942130A81600BD2EFF /* PhotoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewCell.m; sourceTree = "<group>"; };
 		F6A861D9212DC73800B4920F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		F6A861DF212DC89500B4920F /* DBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		F6A861E0212DC89500B4920F /* DBManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		F6A861E2212DF15C00B4920F /* PhotoDiary.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = PhotoDiary.db; sourceTree = "<group>"; };
+		F6AF246B212EA35100F974C3 /* PhotosViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotosViewController.h; sourceTree = "<group>"; };
+		F6AF246C212EA35100F974C3 /* PhotosViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotosViewController.m; sourceTree = "<group>"; };
+		F6B1C50B21303CEA00A9103E /* AlbumsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumsViewController.h; sourceTree = "<group>"; };
+		F6B1C50C21303CEA00A9103E /* AlbumsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumsViewController.m; sourceTree = "<group>"; };
+		F6B1C50E2130521B00A9103E /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6B1C50F2130521B00A9103E /* Photos.framework in Frameworks */,
 				F6A861DA212DC73900B4920F /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -112,12 +121,11 @@
 		F618226D212C100800BDBBF1 /* PhotoDiary */ = {
 			isa = PBXGroup;
 			children = (
-				F6A861DE212DC87F00B4920F /* Model */,
 				F6A861D4212DB69600B4920F /* Controller */,
+				F6B1C50A213039AA00A9103E /* View */,
+				F6A861DE212DC87F00B4920F /* Model */,
 				F618226E212C100900BDBBF1 /* AppDelegate.h */,
 				F618226F212C100900BDBBF1 /* AppDelegate.m */,
-				F6182274212C100900BDBBF1 /* Main.storyboard */,
-				F6182277212C100C00BDBBF1 /* Assets.xcassets */,
 				F618227C212C100C00BDBBF1 /* Info.plist */,
 				F618227D212C100C00BDBBF1 /* main.m */,
 			);
@@ -147,8 +155,10 @@
 			children = (
 				F6182271212C100900BDBBF1 /* MainViewController.h */,
 				F6182272212C100900BDBBF1 /* MainViewController.m */,
-				F6A861D7212DBBF200B4920F /* ImagesViewController.h */,
-				F6A861D5212DBBC900B4920F /* ImagesViewController.m */,
+				F6AF246B212EA35100F974C3 /* PhotosViewController.h */,
+				F6AF246C212EA35100F974C3 /* PhotosViewController.m */,
+				F6B1C50B21303CEA00A9103E /* AlbumsViewController.h */,
+				F6B1C50C21303CEA00A9103E /* AlbumsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -156,6 +166,7 @@
 		F6A861D8212DC73800B4920F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F6B1C50E2130521B00A9103E /* Photos.framework */,
 				F6A861D9212DC73800B4920F /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
@@ -168,6 +179,17 @@
 				F6A861E0212DC89500B4920F /* DBManager.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F6B1C50A213039AA00A9103E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F6182274212C100900BDBBF1 /* Main.storyboard */,
+				F6182277212C100C00BDBBF1 /* Assets.xcassets */,
+				F6520A9121307B1A00BD2EFF /* PhotoViewCell.h */,
+				F6520A942130A81600BD2EFF /* PhotoViewCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,11 +322,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6B1C50D21303CEA00A9103E /* AlbumsViewController.m in Sources */,
 				F6182273212C100900BDBBF1 /* MainViewController.m in Sources */,
 				F618227E212C100C00BDBBF1 /* main.m in Sources */,
-				F6A861D6212DBBC900B4920F /* ImagesViewController.m in Sources */,
 				F6182270212C100900BDBBF1 /* AppDelegate.m in Sources */,
+				F6AF246D212EA35100F974C3 /* PhotosViewController.m in Sources */,
 				F6A861E1212DC89500B4920F /* DBManager.m in Sources */,
+				F6520A952130A81600BD2EFF /* PhotoViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
