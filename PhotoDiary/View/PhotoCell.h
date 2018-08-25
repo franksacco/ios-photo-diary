@@ -1,5 +1,5 @@
 //
-//  AlbumsViewController.h
+//  PhotoViewCell.h
 //  PhotoDiary
 //
 //  Created by Francesco Saccani on 24/08/2018.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AlbumsViewController : UICollectionViewController
+@interface PhotoCell : UICollectionViewCell
+
+@property (weak, nonatomic) IBOutlet UIImageView *image;
 
 @end

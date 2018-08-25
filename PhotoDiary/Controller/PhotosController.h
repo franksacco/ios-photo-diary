@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PhotosViewController : UICollectionViewController
+@interface PhotosController : UICollectionViewController
 
 @end

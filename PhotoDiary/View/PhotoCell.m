@@ -6,10 +6,11 @@
 //  Copyright © 2018 Francesco Saccani. All rights reserved.
 //
 
-#import "PhotoViewCell.h"
+#import "PhotoCell.h"
 
-@implementation PhotoViewCell
+@implementation PhotoCell
 
+/*
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -22,5 +23,6 @@
     }
     return self;
 }
+ */
 
 @end
