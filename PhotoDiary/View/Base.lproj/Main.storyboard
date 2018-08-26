@@ -32,7 +32,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rxa-ND-Kyt">
+                                        <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rxa-ND-Kyt">
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                         </imageView>
                                     </subviews>
@@ -45,7 +45,6 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="image" destination="Rxa-ND-Kyt" id="RLd-bS-GkT"/>
-                                    <segue destination="gHa-TH-vWa" kind="show" identifier="ShowPhotoSegue" id="EID-um-iJ1"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -55,24 +54,44 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Foto" id="EUP-3Q-R1f">
-                        <barButtonItem key="rightBarButtonItem" title="Seleziona" id="Avb-V6-3pL"/>
+                        <barButtonItem key="rightBarButtonItem" title="Seleziona" id="Avb-V6-3pL">
+                            <connections>
+                                <action selector="toggleSelectionMode:" destination="kbq-lZ-OVR" id="8GS-pm-bPr"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="selectionButton" destination="Avb-V6-3pL" id="9HF-eN-6AY"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tYR-Pr-bMB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1774" y="-290"/>
         </scene>
-        <!--View Controller-->
+        <!--Photo Controller-->
         <scene sceneID="u3D-EL-IgR">
             <objects>
-                <viewController id="gHa-TH-vWa" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoController" id="gHa-TH-vWa" customClass="PhotoController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="71u-TD-dpF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J0h-9n-vKK">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fZQ-UT-cQ2">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="602"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="fZQ-UT-cQ2" secondAttribute="bottom" id="4eR-pz-E8A"/>
+                                    <constraint firstItem="fZQ-UT-cQ2" firstAttribute="centerY" secondItem="J0h-9n-vKK" secondAttribute="centerY" id="AXo-EA-Xd4"/>
+                                    <constraint firstItem="fZQ-UT-cQ2" firstAttribute="top" secondItem="J0h-9n-vKK" secondAttribute="top" id="EpH-az-OsB"/>
+                                    <constraint firstItem="fZQ-UT-cQ2" firstAttribute="centerX" secondItem="J0h-9n-vKK" secondAttribute="centerX" id="Fxy-Zk-wm0"/>
+                                    <constraint firstAttribute="trailing" secondItem="fZQ-UT-cQ2" secondAttribute="trailing" id="NYo-m4-D2K"/>
+                                    <constraint firstItem="fZQ-UT-cQ2" firstAttribute="leading" secondItem="J0h-9n-vKK" secondAttribute="leading" id="OTf-Jx-bbx"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -84,10 +103,79 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="n8x-Dc-7fM"/>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="zit-J5-qDs">
+                        <barButtonItem key="rightBarButtonItem" title="Info" id="ehg-ga-EpS">
+                            <connections>
+                                <segue destination="dBN-bs-94m" kind="presentation" identifier="showPhotoDetails" id="MkQ-7g-vmO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="imageView" destination="fZQ-UT-cQ2" id="uld-Xu-FQk"/>
+                        <outlet property="scrollView" destination="J0h-9n-vKK" id="mEg-dH-bV5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ow-fM-7nA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2486" y="-290"/>
+        </scene>
+        <!--Dettagli-->
+        <scene sceneID="fiM-fx-Jrf">
+            <objects>
+                <tableViewController id="dBN-bs-94m" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="UxD-11-f9R">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <mapView key="tableFooterView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="QhC-LD-1VK">
+                            <rect key="frame" x="0.0" y="132" width="375" height="204"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </mapView>
+                        <sections>
+                            <tableViewSection id="x8f-pT-j27">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="f46-9E-sIg">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="f46-9E-sIg" id="RmS-aT-Rnf">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Hee-mS-fAO">
+                                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hee-mS-fAO" id="9iS-uK-yRK">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="HGi-Vc-ZeB">
+                                        <rect key="frame" x="0.0" y="88" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HGi-Vc-ZeB" id="C0A-dt-oRb">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="dBN-bs-94m" id="k4h-eD-ueF"/>
+                            <outlet property="delegate" destination="dBN-bs-94m" id="WLc-8v-GWT"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Dettagli" id="1Dx-aW-1E5">
+                        <barButtonItem key="rightBarButtonItem" title="Chiudi" id="cBE-1e-1L9"/>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P0d-FP-YYM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3245.5999999999999" y="-290.10494752623691"/>
         </scene>
         <!--Album-->
         <scene sceneID="Mvt-FD-9ac">
@@ -165,21 +253,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="I1G-kv-4p3">
-                            <size key="itemSize" width="50" height="50"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="I1G-kv-4p3">
+                            <size key="itemSize" width="200" height="200"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoInAlbumCell" id="iNl-BK-cg5">
-                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VPx-Af-hqq">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                        </imageView>
+                                    </subviews>
                                 </view>
-                                <size key="customSize" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="VPx-Af-hqq" secondAttribute="trailing" id="KKB-72-jng"/>
+                                    <constraint firstItem="VPx-Af-hqq" firstAttribute="top" secondItem="iNl-BK-cg5" secondAttribute="top" id="Kte-tn-OM4"/>
+                                    <constraint firstAttribute="bottom" secondItem="VPx-Af-hqq" secondAttribute="bottom" id="cK1-XJ-tch"/>
+                                    <constraint firstItem="VPx-Af-hqq" firstAttribute="leading" secondItem="iNl-BK-cg5" secondAttribute="leading" id="uk5-0j-9Fd"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="L49-Fv-6kq" kind="show" id="lhY-Xi-tdc"/>
                                 </connections>

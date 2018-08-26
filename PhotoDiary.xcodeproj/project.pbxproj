@@ -15,6 +15,8 @@
 		F6182288212C100D00BDBBF1 /* PhotoDiaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F6182287212C100D00BDBBF1 /* PhotoDiaryTests.m */; };
 		F6182293212C100D00BDBBF1 /* PhotoDiaryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F6182292212C100D00BDBBF1 /* PhotoDiaryUITests.m */; };
 		F6520A952130A81600BD2EFF /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6520A942130A81600BD2EFF /* PhotoCell.m */; };
+		F6A2FED52132CD1100121D35 /* PhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A2FED42132CD1100121D35 /* PhotoController.m */; };
+		F6A2FED82133373100121D35 /* PhotoDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A2FED72133373100121D35 /* PhotoDetailsController.m */; };
 		F6A861DA212DC73900B4920F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F6A861D9212DC73800B4920F /* libsqlite3.tbd */; };
 		F6AF246D212EA35100F974C3 /* PhotosController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6AF246C212EA35100F974C3 /* PhotosController.m */; };
 		F6B1C50D21303CEA00A9103E /* AlbumsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1C50C21303CEA00A9103E /* AlbumsController.m */; };
@@ -59,6 +61,10 @@
 		F6182294212C100D00BDBBF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6520A9121307B1A00BD2EFF /* PhotoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		F6520A942130A81600BD2EFF /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
+		F6A2FED32132CD1100121D35 /* PhotoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoController.h; sourceTree = "<group>"; };
+		F6A2FED42132CD1100121D35 /* PhotoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoController.m; sourceTree = "<group>"; };
+		F6A2FED62133373100121D35 /* PhotoDetailsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoDetailsController.h; sourceTree = "<group>"; };
+		F6A2FED72133373100121D35 /* PhotoDetailsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailsController.m; sourceTree = "<group>"; };
 		F6A861D9212DC73800B4920F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		F6AF246B212EA35100F974C3 /* PhotosController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotosController.h; sourceTree = "<group>"; };
 		F6AF246C212EA35100F974C3 /* PhotosController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotosController.m; sourceTree = "<group>"; };
@@ -159,6 +165,10 @@
 				F6182272212C100900BDBBF1 /* RootController.m */,
 				F6AF246B212EA35100F974C3 /* PhotosController.h */,
 				F6AF246C212EA35100F974C3 /* PhotosController.m */,
+				F6A2FED32132CD1100121D35 /* PhotoController.h */,
+				F6A2FED42132CD1100121D35 /* PhotoController.m */,
+				F6A2FED62133373100121D35 /* PhotoDetailsController.h */,
+				F6A2FED72133373100121D35 /* PhotoDetailsController.m */,
 				F6B1C50B21303CEA00A9103E /* AlbumsController.h */,
 				F6B1C50C21303CEA00A9103E /* AlbumsController.m */,
 				F6F50A1321316A1F0014E22D /* AddAlbumController.h */,
@@ -329,7 +339,9 @@
 				F6B1C50D21303CEA00A9103E /* AlbumsController.m in Sources */,
 				F6F50A592131A4C00014E22D /* AlbumCell.m in Sources */,
 				F6182273212C100900BDBBF1 /* RootController.m in Sources */,
+				F6A2FED82133373100121D35 /* PhotoDetailsController.m in Sources */,
 				F618227E212C100C00BDBBF1 /* main.m in Sources */,
+				F6A2FED52132CD1100121D35 /* PhotoController.m in Sources */,
 				F6F50A1521316A1F0014E22D /* AddAlbumController.m in Sources */,
 				F6F50A12213164080014E22D /* Model.xcdatamodeld in Sources */,
 				F6182270212C100900BDBBF1 /* AppDelegate.m in Sources */,

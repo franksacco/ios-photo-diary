@@ -7,6 +7,9 @@
 //
 
 #import "AddAlbumController.h"
+#import <QuartzCore/QuartzCore.h>
+#import <CoreData/CoreData.h>
+#import <UIKit/UIKit.h>
 
 @interface AddAlbumController ()
 
