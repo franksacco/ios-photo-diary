@@ -15,14 +15,18 @@
 		F6182288212C100D00BDBBF1 /* PhotoDiaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F6182287212C100D00BDBBF1 /* PhotoDiaryTests.m */; };
 		F6182293212C100D00BDBBF1 /* PhotoDiaryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F6182292212C100D00BDBBF1 /* PhotoDiaryUITests.m */; };
 		F6520A952130A81600BD2EFF /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6520A942130A81600BD2EFF /* PhotoCell.m */; };
+		F6A0317D213434550041006A /* AlbumPhotosController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A0317C213434550041006A /* AlbumPhotosController.m */; };
+		F6A03180213442380041006A /* AlbumPhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A0317F213442380041006A /* AlbumPhotoController.m */; };
+		F6A03183213556D00041006A /* AddToAlbumController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A03182213556D00041006A /* AddToAlbumController.m */; };
+		F6A031892135C8210041006A /* PhotoDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A031882135C8200041006A /* PhotoDetailsController.m */; };
+		F6A0318C2135F21D0041006A /* AlbumPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A0318B2135F21D0041006A /* AlbumPhotoCell.m */; };
 		F6A2FED52132CD1100121D35 /* PhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A2FED42132CD1100121D35 /* PhotoController.m */; };
-		F6A2FED82133373100121D35 /* PhotoDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A2FED72133373100121D35 /* PhotoDetailsController.m */; };
 		F6A861DA212DC73900B4920F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F6A861D9212DC73800B4920F /* libsqlite3.tbd */; };
 		F6AF246D212EA35100F974C3 /* PhotosController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6AF246C212EA35100F974C3 /* PhotosController.m */; };
 		F6B1C50D21303CEA00A9103E /* AlbumsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1C50C21303CEA00A9103E /* AlbumsController.m */; };
 		F6B1C50F2130521B00A9103E /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B1C50E2130521B00A9103E /* Photos.framework */; };
 		F6F50A12213164080014E22D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F6F50A10213164080014E22D /* Model.xcdatamodeld */; };
-		F6F50A1521316A1F0014E22D /* AddAlbumController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F50A1421316A1F0014E22D /* AddAlbumController.m */; };
+		F6F50A1521316A1F0014E22D /* EditAlbumController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F50A1421316A1F0014E22D /* EditAlbumController.m */; };
 		F6F50A592131A4C00014E22D /* AlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F50A582131A4C00014E22D /* AlbumCell.m */; };
 /* End PBXBuildFile section */
 
@@ -61,10 +65,18 @@
 		F6182294212C100D00BDBBF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6520A9121307B1A00BD2EFF /* PhotoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		F6520A942130A81600BD2EFF /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
+		F6A0317B213434550041006A /* AlbumPhotosController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumPhotosController.h; sourceTree = "<group>"; };
+		F6A0317C213434550041006A /* AlbumPhotosController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumPhotosController.m; sourceTree = "<group>"; };
+		F6A0317E213442380041006A /* AlbumPhotoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumPhotoController.h; sourceTree = "<group>"; };
+		F6A0317F213442380041006A /* AlbumPhotoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumPhotoController.m; sourceTree = "<group>"; };
+		F6A03181213556D00041006A /* AddToAlbumController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddToAlbumController.h; sourceTree = "<group>"; };
+		F6A03182213556D00041006A /* AddToAlbumController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddToAlbumController.m; sourceTree = "<group>"; };
+		F6A031872135C8200041006A /* PhotoDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDetailsController.h; sourceTree = "<group>"; };
+		F6A031882135C8200041006A /* PhotoDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailsController.m; sourceTree = "<group>"; };
+		F6A0318A2135F21D0041006A /* AlbumPhotoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumPhotoCell.h; sourceTree = "<group>"; };
+		F6A0318B2135F21D0041006A /* AlbumPhotoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumPhotoCell.m; sourceTree = "<group>"; };
 		F6A2FED32132CD1100121D35 /* PhotoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoController.h; sourceTree = "<group>"; };
 		F6A2FED42132CD1100121D35 /* PhotoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoController.m; sourceTree = "<group>"; };
-		F6A2FED62133373100121D35 /* PhotoDetailsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoDetailsController.h; sourceTree = "<group>"; };
-		F6A2FED72133373100121D35 /* PhotoDetailsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailsController.m; sourceTree = "<group>"; };
 		F6A861D9212DC73800B4920F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		F6AF246B212EA35100F974C3 /* PhotosController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotosController.h; sourceTree = "<group>"; };
 		F6AF246C212EA35100F974C3 /* PhotosController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotosController.m; sourceTree = "<group>"; };
@@ -72,8 +84,8 @@
 		F6B1C50C21303CEA00A9103E /* AlbumsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumsController.m; sourceTree = "<group>"; };
 		F6B1C50E2130521B00A9103E /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		F6F50A11213164080014E22D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		F6F50A1321316A1F0014E22D /* AddAlbumController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddAlbumController.h; sourceTree = "<group>"; };
-		F6F50A1421316A1F0014E22D /* AddAlbumController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddAlbumController.m; sourceTree = "<group>"; };
+		F6F50A1321316A1F0014E22D /* EditAlbumController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditAlbumController.h; sourceTree = "<group>"; };
+		F6F50A1421316A1F0014E22D /* EditAlbumController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditAlbumController.m; sourceTree = "<group>"; };
 		F6F50A572131A4C00014E22D /* AlbumCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumCell.h; sourceTree = "<group>"; };
 		F6F50A582131A4C00014E22D /* AlbumCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,21 +170,43 @@
 			path = PhotoDiaryUITests;
 			sourceTree = "<group>";
 		};
-		F6A861D4212DB69600B4920F /* Controller */ = {
+		F6A03176213413A80041006A /* photos */ = {
 			isa = PBXGroup;
 			children = (
-				F6182271212C100900BDBBF1 /* RootController.h */,
-				F6182272212C100900BDBBF1 /* RootController.m */,
+				F6A03181213556D00041006A /* AddToAlbumController.h */,
+				F6A03182213556D00041006A /* AddToAlbumController.m */,
 				F6AF246B212EA35100F974C3 /* PhotosController.h */,
 				F6AF246C212EA35100F974C3 /* PhotosController.m */,
 				F6A2FED32132CD1100121D35 /* PhotoController.h */,
 				F6A2FED42132CD1100121D35 /* PhotoController.m */,
-				F6A2FED62133373100121D35 /* PhotoDetailsController.h */,
-				F6A2FED72133373100121D35 /* PhotoDetailsController.m */,
+				F6A031872135C8200041006A /* PhotoDetailsController.h */,
+				F6A031882135C8200041006A /* PhotoDetailsController.m */,
+			);
+			path = photos;
+			sourceTree = "<group>";
+		};
+		F6A03177213413BD0041006A /* albums */ = {
+			isa = PBXGroup;
+			children = (
+				F6F50A1321316A1F0014E22D /* EditAlbumController.h */,
+				F6F50A1421316A1F0014E22D /* EditAlbumController.m */,
 				F6B1C50B21303CEA00A9103E /* AlbumsController.h */,
 				F6B1C50C21303CEA00A9103E /* AlbumsController.m */,
-				F6F50A1321316A1F0014E22D /* AddAlbumController.h */,
-				F6F50A1421316A1F0014E22D /* AddAlbumController.m */,
+				F6A0317B213434550041006A /* AlbumPhotosController.h */,
+				F6A0317C213434550041006A /* AlbumPhotosController.m */,
+				F6A0317E213442380041006A /* AlbumPhotoController.h */,
+				F6A0317F213442380041006A /* AlbumPhotoController.m */,
+			);
+			path = albums;
+			sourceTree = "<group>";
+		};
+		F6A861D4212DB69600B4920F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F6A03177213413BD0041006A /* albums */,
+				F6A03176213413A80041006A /* photos */,
+				F6182271212C100900BDBBF1 /* RootController.h */,
+				F6182272212C100900BDBBF1 /* RootController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -203,6 +237,8 @@
 				F6520A942130A81600BD2EFF /* PhotoCell.m */,
 				F6F50A572131A4C00014E22D /* AlbumCell.h */,
 				F6F50A582131A4C00014E22D /* AlbumCell.m */,
+				F6A0318A2135F21D0041006A /* AlbumPhotoCell.h */,
+				F6A0318B2135F21D0041006A /* AlbumPhotoCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -336,14 +372,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6A0318C2135F21D0041006A /* AlbumPhotoCell.m in Sources */,
 				F6B1C50D21303CEA00A9103E /* AlbumsController.m in Sources */,
+				F6A03183213556D00041006A /* AddToAlbumController.m in Sources */,
 				F6F50A592131A4C00014E22D /* AlbumCell.m in Sources */,
 				F6182273212C100900BDBBF1 /* RootController.m in Sources */,
-				F6A2FED82133373100121D35 /* PhotoDetailsController.m in Sources */,
 				F618227E212C100C00BDBBF1 /* main.m in Sources */,
+				F6A031892135C8210041006A /* PhotoDetailsController.m in Sources */,
 				F6A2FED52132CD1100121D35 /* PhotoController.m in Sources */,
-				F6F50A1521316A1F0014E22D /* AddAlbumController.m in Sources */,
+				F6F50A1521316A1F0014E22D /* EditAlbumController.m in Sources */,
 				F6F50A12213164080014E22D /* Model.xcdatamodeld in Sources */,
+				F6A0317D213434550041006A /* AlbumPhotosController.m in Sources */,
+				F6A03180213442380041006A /* AlbumPhotoController.m in Sources */,
 				F6182270212C100900BDBBF1 /* AppDelegate.m in Sources */,
 				F6AF246D212EA35100F974C3 /* PhotosController.m in Sources */,
 				F6520A952130A81600BD2EFF /* PhotoCell.m in Sources */,

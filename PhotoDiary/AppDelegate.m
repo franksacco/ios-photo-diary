@@ -18,9 +18,6 @@
 
 - (BOOL)application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-#if TARGET_IPHONE_SIMULATOR
-    NSLog(@"Documents Directory: %@", [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
-#endif
     return YES;
 }
 
@@ -66,7 +63,6 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
             }];
         }
     }
-    
     return _persistentContainer;
 }
 

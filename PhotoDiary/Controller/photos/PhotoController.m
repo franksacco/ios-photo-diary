@@ -23,13 +23,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationItem setLargeTitleDisplayMode:UINavigationItemLargeTitleDisplayModeNever];
     
     [self.scrollView setDelegate:self];
-    [self.scrollView setMaximumZoomScale:3];
-    [self.scrollView setContentMode:UIViewContentModeScaleAspectFit];
-    [self.imageView setAutoresizingMask:UIViewAutoresizingNone];
-    [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [self.scrollView setMaximumZoomScale:4];
 }
 
 
@@ -37,8 +33,10 @@
     [self.imageView setImage:image];
     self.asset = asset;
     
-    [self.scrollView setMinimumZoomScale: self.scrollView.frame.size.width / self.imageView.frame.size.width];
-    [self.scrollView setContentSize:CGSizeMake(self.imageView.frame.size.width, self.imageView.frame.size.height)];
+    [self.scrollView setMinimumZoomScale:
+        self.scrollView.frame.size.width / self.imageView.frame.size.width];
+    [self.scrollView setContentSize:
+        CGSizeMake(self.imageView.frame.size.width, self.imageView.frame.size.height)];
 }
 
 
@@ -51,6 +49,8 @@
     [super didReceiveMemoryWarning];
 }
 
+
+#pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showPhotoDetails"]) {

@@ -6,9 +6,8 @@
 //  Copyright © 2018 Francesco Saccani. All rights reserved.
 //
 
-#import "AppDelegate.h"
-#import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
+
 
 @interface AlbumsController : UICollectionViewController
 

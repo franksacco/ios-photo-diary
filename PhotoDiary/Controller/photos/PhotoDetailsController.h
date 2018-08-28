@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
 
-@interface PhotoDetailsController : UIViewController
+@interface PhotoDetailsController : UITableViewController
 
 @property PHAsset *asset;
 

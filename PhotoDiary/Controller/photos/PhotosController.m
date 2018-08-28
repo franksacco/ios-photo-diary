@@ -8,9 +8,12 @@
 
 #import "PhotosController.h"
 #import "PhotoController.h"
+#import "AddToAlbumController.h"
 #import "PhotoCell.h"
+#import "Album+CoreDataProperties.h"
 #import <Photos/Photos.h>
 #import <QuartzCore/QuartzCore.h>
+
 
 @interface PhotosController ()
 
@@ -19,6 +22,8 @@
 
 @property BOOL selectionMode;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *selectionButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addToButton;
+@property (nonatomic, strong) NSMutableArray<PHAsset *> *selectedPhotos;
 - (IBAction)toggleSelectionMode:(UIBarButtonItem *)sender;
 
 @end
@@ -31,25 +36,29 @@ static NSString * const reuseIdentifier = @"PhotoCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.selectionMode = NO;
     
+    self.selectionMode = NO;
+    self.selectedPhotos = [[NSMutableArray alloc] init];
+    self.clearsSelectionOnViewWillAppear = YES;
     self.collectionView.allowsMultipleSelection = YES;
 }
 
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.navigationItem.leftBarButtonItem.title = @"";
+    self.navigationItem.leftBarButtonItem.enabled = NO;
+    [self.navigationItem setTitle:@"Foto"];
+    [self.selectionButton setTitle:@"Seleziona"];
+    [self.selectedPhotos removeAllObjects];
     
     PHFetchOptions *options = [[PHFetchOptions alloc] init];
     options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
-    _assetsFetchResults = [PHAsset fetchAssetsWithOptions:options];
-    _imageManager = [[PHCachingImageManager alloc] init];
-    NSLog(@"%td images founded", _assetsFetchResults.count);
+    self.assetsFetchResults = [PHAsset fetchAssetsWithOptions:options];
+    self.imageManager = [[PHCachingImageManager alloc] init];
+    NSLog(@"%td images founded", self.assetsFetchResults.count);
     [self.collectionView reloadData];
-    
-    if (self.selectionMode) {
-        [self toggleSelectionMode:self.selectionButton];
-    }
 }
 
 
@@ -62,8 +71,13 @@ static NSString * const reuseIdentifier = @"PhotoCell";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue
                  sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"showAddToAlbum"]) {
+        if ([segue.destinationViewController isKindOfClass:[AddToAlbumController class]]) {
+            AddToAlbumController *cv = segue.destinationViewController;
+            cv.photos = self.selectedPhotos;
+            NSLog(@"photo passed: %@", self.selectedPhotos);
+        }
+    }
 }
 
 
@@ -82,17 +96,17 @@ static NSString * const reuseIdentifier = @"PhotoCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    PhotoCell *cell = (PhotoCell *) [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier
-                                                                              forIndexPath:indexPath];
-    PHAsset *asset = _assetsFetchResults[indexPath.item];
-    [_imageManager requestImageForAsset:asset
-                             targetSize:CGSizeMake(150, 150)
-                            contentMode:PHImageContentModeAspectFill
-                                options:nil
-                          resultHandler:^(UIImage *result, NSDictionary *info) {
-                              cell.image.opaque = NO;
-                              cell.image.image = result;
-                          }];
+    PhotoCell *cell = (PhotoCell *)[collectionView
+                                    dequeueReusableCellWithReuseIdentifier:reuseIdentifier
+                                    forIndexPath:indexPath];
+    PHAsset *asset = self.assetsFetchResults[indexPath.item];
+    [self.imageManager requestImageForAsset:asset
+                                 targetSize:CGSizeMake(cell.bounds.size.width, cell.bounds.size.height)
+                                contentMode:PHImageContentModeAspectFill
+                                    options:nil
+                              resultHandler:^(UIImage *result, NSDictionary *info) {
+                                  cell.image.image = result;
+                              }];
     return cell;
 }
 
@@ -107,46 +121,39 @@ static NSString * const reuseIdentifier = @"PhotoCell";
 
 #pragma mark <UICollectionViewDelegate>
 
-
 - (BOOL)collectionView:(UICollectionView *)collectionView
 shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
+
 
 - (void)collectionView:(UICollectionView *)collectionView
 didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     PhotoCell *cell = (PhotoCell *)[collectionView
                                     dequeueReusableCellWithReuseIdentifier:reuseIdentifier
                                     forIndexPath:indexPath];
+    PHAsset *asset = self.assetsFetchResults[indexPath.item];
     if (self.selectionMode) {
-        [cell.layer setBorderColor:[UIColor blueColor].CGColor];
-        [cell.layer setBorderWidth:2];
-        [cell reloadInputViews];
-        NSLog(@"cell layer: %@", cell.layer);
-        // save selection
-        //[self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+        [self.selectedPhotos addObject:asset];
+        NSLog(@"selected: %@", cell);
     } else {
-        [self viewImageForIndexPath:indexPath];
+        [self viewImageForAsset:asset];
     }
 }
 
-- (void)viewImageForIndexPath:(NSIndexPath *)indexPath {
+- (void)viewImageForAsset:(PHAsset *)asset {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    PhotoController *controller = (PhotoController *)[storyboard instantiateViewControllerWithIdentifier:@"PhotoController"];
+    PhotoController *controller =
+        (PhotoController *)[storyboard instantiateViewControllerWithIdentifier:@"PhotoController"];
     [self.navigationController pushViewController:controller
                                          animated:YES];
-    
-    PHAsset *asset = _assetsFetchResults[indexPath.item];
-    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-    options.resizeMode   = PHImageRequestOptionsResizeModeExact;
-    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-    [_imageManager requestImageForAsset:asset
-                             targetSize:PHImageManagerMaximumSize
-                            contentMode:PHImageContentModeDefault
-                                options:nil //options
-                          resultHandler:^(UIImage *result, NSDictionary *info) {
-                              [controller setImage:result withAsset:asset];
-                          }];
+    [self.imageManager requestImageForAsset:asset
+                                 targetSize:PHImageManagerMaximumSize
+                             contentMode:PHImageContentModeDefault
+                                 options:nil
+                           resultHandler:^(UIImage *result, NSDictionary *info) {
+                               [controller setImage:result withAsset:asset];
+                           }];
 }
 
 
@@ -155,27 +162,32 @@ shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
 
+
 - (void)collectionView:(UICollectionView *)collectionView
 didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     PhotoCell *cell = (PhotoCell *)[collectionView
                                     dequeueReusableCellWithReuseIdentifier:reuseIdentifier
                                     forIndexPath:indexPath];
-    [cell.layer setBorderWidth:0];
+    PHAsset *asset = self.assetsFetchResults[indexPath.item];
+    // change layout
+    [self.selectedPhotos removeObject:asset];
     NSLog(@"deselected: %@", cell);
-    [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
 }
 
 
 - (IBAction)toggleSelectionMode:(UIBarButtonItem *)sender {
     if (self.selectionMode) {
+        self.navigationItem.leftBarButtonItem.title = @"";
+        self.navigationItem.leftBarButtonItem.enabled = NO;
         [self.navigationItem setTitle:@"Foto"];
         [sender setTitle:@"Seleziona"];
-        for (int i = 0; i < _assetsFetchResults.count; i++) {
-            for (NSIndexPath *indexPath in [self.collectionView indexPathsForSelectedItems]) {
-                [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
-            }
+        for (NSIndexPath *indexPath in [self.collectionView indexPathsForSelectedItems]) {
+            [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
         }
+        [self.selectedPhotos removeAllObjects];
     } else {
+        self.navigationItem.leftBarButtonItem.title = @"Aggiungi";
+        self.navigationItem.leftBarButtonItem.enabled = YES;
         [self.navigationItem setTitle:@"Seleziona foto"];
         [sender setTitle:@"Annulla"];
     }

@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Album" representedClassName="Album" syncable="YES" codeGenerationType="class">
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AlbumPhoto" inverseName="album" inverseEntity="AlbumPhoto" syncable="YES"/>
+    </entity>
+    <entity name="AlbumPhoto" representedClassName="AlbumPhoto" syncable="YES" codeGenerationType="class">
+        <attribute name="localIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="album" maxCount="1" deletionRule="Nullify" destinationEntity="Album" inverseName="photos" inverseEntity="Album" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Album" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="Album" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="AlbumPhoto" positionX="-63" positionY="0" width="128" height="75"/>
     </elements>
 </model>

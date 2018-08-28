@@ -7,7 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import "Album+CoreDataClass.h"
+#import <UIKit/UIKit.h>
 
-@interface AddAlbumController : UIViewController
+
+@interface EditAlbumController : UIViewController
+
+@property (nonatomic, strong) Album *album;
 
 @end
