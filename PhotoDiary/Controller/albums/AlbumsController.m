@@ -13,6 +13,7 @@
 #import "Album+CoreDataClass.h"
 #import "AlbumPhoto+CoreDataClass.h"
 #import <Photos/Photos.h>
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface AlbumsController ()
@@ -31,7 +32,6 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.imageManager = [[PHCachingImageManager alloc] init];
 }
 
@@ -97,6 +97,8 @@ static NSString * const reuseIdentifier = @"AlbumCell";
                                     forIndexPath:indexPath];
     Album *album = [self.albums objectAtIndex:indexPath.row];
     [cell.label setText:album.title];
+    [cell.image.layer setCornerRadius:5];
+    [cell.elementNumber setText:[NSString stringWithFormat:@"%ld elementi", album.photos.count]];
     if (album.photos.count > 0) {
         NSArray *identifiers = [[NSArray alloc] initWithObjects:[album.photos anyObject].localIdentifier, nil];
         PHFetchResult *asset = [PHAsset fetchAssetsWithLocalIdentifiers:identifiers options:nil];
@@ -118,7 +120,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat size = collectionView.bounds.size.width / 2.0;
-    return CGSizeMake(size, size);
+    return CGSizeMake(size, size + 20);
 }
 
 

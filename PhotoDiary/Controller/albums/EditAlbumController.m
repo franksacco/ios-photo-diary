@@ -89,13 +89,32 @@
 
 
 - (IBAction)delete:(UIButton *)sender {
+    UIAlertController *dialog =
+        [UIAlertController alertControllerWithTitle:@"Elimina album"
+            message:@"Confermi l'eliminazione dell'album? L'azione non può essere annullata"
+            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *confirmAction =
+        [UIAlertAction actionWithTitle:@"Conferma"
+                                 style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * _Nonnull action) {
+                                   [self deleteAlbum];
+                               }];
+    [dialog addAction:confirmAction];
+    UIAlertAction *cancelAction =
+        [UIAlertAction actionWithTitle:@"Annulla"
+                                 style:UIAlertActionStyleCancel
+                               handler:nil];
+    [dialog addAction:cancelAction];
+    
+    [self presentViewController:dialog animated:YES completion:nil];
+}
+
+- (void)deleteAlbum {
     NSManagedObjectContext *context = [self managedObjectContext];
     [context deleteObject:self.album];
-    
     NSError *error = nil;
-    if ([context save:&error]) {
-        NSLog(@"Album deleted");
-    } else {
+    if (![context save:&error]) {
         NSLog(@"Deleting error: %@ %@", error, [error localizedDescription]);
     }
     [self dismissViewControllerAnimated:YES completion:nil];

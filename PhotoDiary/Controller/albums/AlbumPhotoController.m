@@ -7,6 +7,8 @@
 //
 
 #import "AlbumPhotoController.h"
+#import "AlbumPhotoDetailsController.h"
+
 
 @interface AlbumPhotoController ()
 
@@ -52,8 +54,12 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"showAlbumPhotoDetail"]) {
-        
+    if ([segue.identifier isEqualToString:@"showAlbumPhotoDetails"]) {
+        if ([segue.destinationViewController isKindOfClass:[AlbumPhotoDetailsController class]]) {
+            AlbumPhotoDetailsController *cv = segue.destinationViewController;
+            cv.asset = self.asset;
+            NSLog(@"asset sent: %@", self.asset);
+        }
     }
 }
 

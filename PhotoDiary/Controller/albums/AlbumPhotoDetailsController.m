@@ -1,16 +1,16 @@
 //
-//  PhotoDetailsController.m
+//  AlbumPhotoDetailsController.m
 //  PhotoDiary
 //
-//  Created by Francesco Saccani on 26/08/18.
+//  Created by Francesco Saccani on 29/08/18.
 //  Copyright © 2018 Francesco Saccani. All rights reserved.
 //
 
-#import "PhotoDetailsController.h"
+#import "AlbumPhotoDetailsController.h"
 #import <MapKit/MapKit.h>
 
 
-@interface PhotoDetailsController ()
+@interface AlbumPhotoDetailsController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *mediaTypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *mediaSubtypeLabel;
@@ -23,22 +23,21 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 - (IBAction)closeButtonClicked:(UIBarButtonItem *)sender;
+- (IBAction)delete:(UIBarButtonItem *)sender;
 
 @end
 
 
-@implementation PhotoDetailsController
-
+@implementation AlbumPhotoDetailsController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self.tableView setAllowsSelection:NO];
 }
 
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    NSLog(@"asset received: %@", self.asset);
     
     switch (self.asset.mediaType) {
         case PHAssetMediaTypeImage:
@@ -126,6 +125,9 @@
 
 - (IBAction)closeButtonClicked:(UIBarButtonItem *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)delete:(UIBarButtonItem *)sender {
 }
 
 

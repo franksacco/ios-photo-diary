@@ -12,15 +12,13 @@
 #import "Album+CoreDataClass.h"
 #import "AlbumPhoto+CoreDataClass.h"
 #import <Photos/Photos.h>
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface AddToAlbumController ()
 
 @property (nonatomic, strong) PHCachingImageManager *imageManager;
-
 @property (nonatomic, strong) NSArray<Album *> *albums;
-@property (nonatomic, strong) Album *selectedAlbum;
-
 - (IBAction)cancel:(UIButton *)sender;
 
 @end
@@ -33,7 +31,6 @@ static NSString * const reuseIdentifier = @"AddToAlbumCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.imageManager = [[PHCachingImageManager alloc] init];
 }
 
@@ -90,6 +87,8 @@ static NSString * const reuseIdentifier = @"AddToAlbumCell";
                                     forIndexPath:indexPath];
     Album *album = [self.albums objectAtIndex:indexPath.row];
     [cell.label setText:album.title];
+    [cell.image.layer setCornerRadius:5];
+    [cell.elementNumber setText:[NSString stringWithFormat:@"%ld elementi", album.photos.count]];
     if (album.photos.count > 0) {
         NSArray *identifiers = [[NSArray alloc] initWithObjects:[album.photos anyObject].localIdentifier, nil];
         PHFetchResult *asset = [PHAsset fetchAssetsWithLocalIdentifiers:identifiers options:nil];
@@ -146,24 +145,33 @@ shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)collectionView:(UICollectionView *)collectionView
 didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    self.selectedAlbum = [self.albums objectAtIndex:indexPath.row];
-    
+    Album *album = [self.albums objectAtIndex:indexPath.row];
     NSManagedObjectContext *context = [self managedObjectContext];
     for (PHAsset *asset in self.photos) {
-        AlbumPhoto *photo = (AlbumPhoto *)[NSEntityDescription
-                                           insertNewObjectForEntityForName:@"AlbumPhoto"
-                                           inManagedObjectContext:context];
-        photo.localIdentifier = asset.localIdentifier;
-        [self.selectedAlbum addPhotosObject:photo];
+        if (![self isAsset:asset alreadyInAlbum:album]) {
+            AlbumPhoto *photo = (AlbumPhoto *)[NSEntityDescription
+                                               insertNewObjectForEntityForName:@"AlbumPhoto"
+                                               inManagedObjectContext:context];
+            photo.localIdentifier = asset.localIdentifier;
+            [album addPhotosObject:photo];
+            NSLog(@"photo added: %@", photo);
+        }
     }
     
     NSError *error;
-    if ([context save:&error]) {
-        NSLog(@"Photos inserted");
-    } else {
+    if (![context save:&error]) {
         NSLog(@"Error during photos inserting: %@ %@", error, [error localizedDescription]);
     }
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (BOOL)isAsset:(PHAsset *)asset alreadyInAlbum:(Album *)album {
+    for (AlbumPhoto *photo in album.photos) {
+        if ([photo.localIdentifier isEqualToString:asset.localIdentifier]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 

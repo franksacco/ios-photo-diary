@@ -75,7 +75,6 @@ static NSString * const reuseIdentifier = @"PhotoCell";
         if ([segue.destinationViewController isKindOfClass:[AddToAlbumController class]]) {
             AddToAlbumController *cv = segue.destinationViewController;
             cv.photos = self.selectedPhotos;
-            NSLog(@"photo passed: %@", self.selectedPhotos);
         }
     }
 }

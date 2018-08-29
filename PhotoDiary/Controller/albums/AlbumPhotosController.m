@@ -58,8 +58,16 @@ static NSString * const reuseIdentifier = @"AlbumPhotoCell";
                  sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showAlbumPhoto"]) {
         if ([segue.destinationViewController isKindOfClass:[AlbumPhotoController class]]) {
-            //AlbumPhotoController *cv = [segue destinationViewController];
-            
+            NSIndexPath *index = [self.collectionView indexPathForCell:(AlbumPhotoCell *)sender];
+            PHAsset *asset = [self.assetsFetchResults objectAtIndex:index.row];
+            AlbumPhotoController *cv = [segue destinationViewController];
+            [self.imageManager requestImageForAsset:asset
+                                         targetSize:PHImageManagerMaximumSize
+                                        contentMode:PHImageContentModeDefault
+                                            options:nil
+                                      resultHandler:^(UIImage *result, NSDictionary *info) {
+                                          [cv setImage:result withAsset:asset];
+                                      }];
         }
     } else if ([segue.identifier isEqualToString:@"showEditAlbum"]) {
         if ([segue.destinationViewController isKindOfClass:[EditAlbumController class]]) {
@@ -88,7 +96,6 @@ static NSString * const reuseIdentifier = @"AlbumPhotoCell";
     AlbumPhotoCell *cell = (AlbumPhotoCell *)[collectionView
                                               dequeueReusableCellWithReuseIdentifier:reuseIdentifier
                                               forIndexPath:indexPath];
-
     [self.imageManager requestImageForAsset:self.assetsFetchResults[indexPath.item]
                                  targetSize:CGSizeMake(cell.bounds.size.width, cell.bounds.size.height)
                                 contentMode:PHImageContentModeAspectFill
@@ -105,6 +112,37 @@ static NSString * const reuseIdentifier = @"AlbumPhotoCell";
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat size = (collectionView.bounds.size.width - 6.0) / 4.0;
     return CGSizeMake(size, size);
+}
+
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+           viewForSupplementaryElementOfKind:(NSString *)kind
+                                 atIndexPath:(NSIndexPath *)indexPath {
+    if (kind == UICollectionElementKindSectionHeader) {
+        UICollectionReusableView *header =
+        [collectionView
+         dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+         withReuseIdentifier:@"albumHeader" forIndexPath:indexPath];
+        
+        UIView *padding = [[UIView alloc] initWithFrame:
+                           CGRectMake(16, 16, header.bounds.size.width-32, header.bounds.size.height-32)];
+        UILabel *label = [[UILabel alloc] init];
+        [label setText:self.album.desc];
+        label.textColor = [UIColor grayColor];
+        [padding addSubview:label];
+        [label sizeToFit];
+        
+        [header addSubview:padding];
+        return header;
+    }
+    return nil;
+}
+
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+referenceSizeForHeaderInSection:(NSInteger)section {
+    return CGSizeMake(UIScreen.mainScreen.bounds.size.width, 60);
 }
 
 

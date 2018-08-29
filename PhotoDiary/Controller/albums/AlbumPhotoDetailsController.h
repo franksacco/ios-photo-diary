@@ -1,8 +1,8 @@
 //
-//  PhotoDetailsController.h
+//  AlbumPhotoDetailsController.h
 //  PhotoDiary
 //
-//  Created by Francesco Saccani on 26/08/18.
+//  Created by Francesco Saccani on 29/08/18.
 //  Copyright © 2018 Francesco Saccani. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 #import <Photos/Photos.h>
 
 
-@interface PhotoDetailsController : UITableViewController
+@interface AlbumPhotoDetailsController : UITableViewController
 
 @property PHAsset *asset;
 
