@@ -7,6 +7,8 @@
 //
 
 #import "AlbumPhotoDetailsController.h"
+#import "AlbumPhotosController.h"
+#import "AppDelegate.h"
 #import <MapKit/MapKit.h>
 
 
@@ -37,7 +39,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSLog(@"asset received: %@", self.asset);
     
     switch (self.asset.mediaType) {
         case PHAssetMediaTypeImage:
@@ -123,11 +124,52 @@
 }
 
 
+- (NSManagedObjectContext *)managedObjectContext {
+    NSManagedObjectContext *context = nil;
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if ([delegate respondsToSelector:@selector(persistentContainer)]) {
+        context = [[delegate persistentContainer] viewContext];
+    }
+    return context;
+}
+
+
 - (IBAction)closeButtonClicked:(UIBarButtonItem *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
 - (IBAction)delete:(UIBarButtonItem *)sender {
+    UIAlertController *dialog =
+    [UIAlertController alertControllerWithTitle:@"Elimina foto"
+                                        message:@"La foto verrà eliminata solo all'interno di questo album e il file rimarrà nella libreria, confermi?"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *confirmAction =
+    [UIAlertAction actionWithTitle:@"Conferma"
+                             style:UIAlertActionStyleDestructive
+                           handler:^(UIAlertAction * _Nonnull action) {
+                               [self deletePhoto];
+                           }];
+    [dialog addAction:confirmAction];
+    UIAlertAction *cancelAction =
+    [UIAlertAction actionWithTitle:@"Annulla"
+                             style:UIAlertActionStyleCancel
+                           handler:nil];
+    [dialog addAction:cancelAction];
+    
+    [self presentViewController:dialog animated:YES completion:nil];
+}
+
+- (void)deletePhoto {
+    NSManagedObjectContext *context = [self managedObjectContext];
+    [context deleteObject:self.albumPhoto];
+    NSError *error = nil;
+    if (![context save:&error]) {
+        NSLog(@"Deleting error: %@ %@", error, [error localizedDescription]);
+    }
+    self.albumPhoto.localIdentifier = nil;
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

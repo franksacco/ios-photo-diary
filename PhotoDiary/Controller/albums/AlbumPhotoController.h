@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
+#import "AlbumPhoto+CoreDataClass.h"
+
 
 @interface AlbumPhotoController : UIViewController<UIScrollViewDelegate>
 
-- (void)setImage:(UIImage *)image withAsset:(PHAsset *)asset;
+@property PHAsset *asset;
+@property AlbumPhoto *albumPhoto;
+- (void)showImage:(UIImage *)image;
 
 @end

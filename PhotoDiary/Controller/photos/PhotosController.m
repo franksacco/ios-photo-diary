@@ -26,6 +26,8 @@
 @property (nonatomic, strong) NSMutableArray<PHAsset *> *selectedPhotos;
 - (IBAction)toggleSelectionMode:(UIBarButtonItem *)sender;
 
+- (IBAction)openCamera:(UIBarButtonItem *)sender;
+
 @end
 
 
@@ -36,6 +38,7 @@ static NSString * const reuseIdentifier = @"PhotoCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.imageManager = [[PHCachingImageManager alloc] init];
     
     self.selectionMode = NO;
     self.selectedPhotos = [[NSMutableArray alloc] init];
@@ -51,12 +54,18 @@ static NSString * const reuseIdentifier = @"PhotoCell";
     self.navigationItem.leftBarButtonItem.enabled = NO;
     [self.navigationItem setTitle:@"Foto"];
     [self.selectionButton setTitle:@"Seleziona"];
+    self.selectionMode = NO;
     [self.selectedPhotos removeAllObjects];
     
+    [self loadPhotos];
+}
+
+
+- (void)loadPhotos {
     PHFetchOptions *options = [[PHFetchOptions alloc] init];
     options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
     self.assetsFetchResults = [PHAsset fetchAssetsWithOptions:options];
-    self.imageManager = [[PHCachingImageManager alloc] init];
+    
     NSLog(@"%td images founded", self.assetsFetchResults.count);
     [self.collectionView reloadData];
 }
@@ -98,6 +107,13 @@ static NSString * const reuseIdentifier = @"PhotoCell";
     PhotoCell *cell = (PhotoCell *)[collectionView
                                     dequeueReusableCellWithReuseIdentifier:reuseIdentifier
                                     forIndexPath:indexPath];
+    if (cell.selected) {
+        [cell.image setAlpha:0.7];
+        [cell.selectionIcon setHidden:NO];
+    } else {
+        [cell.image setAlpha:1];
+        [cell.selectionIcon setHidden:YES];
+    }
     PHAsset *asset = self.assetsFetchResults[indexPath.item];
     [self.imageManager requestImageForAsset:asset
                                  targetSize:CGSizeMake(cell.bounds.size.width, cell.bounds.size.height)
@@ -128,13 +144,12 @@ shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)collectionView:(UICollectionView *)collectionView
 didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    PhotoCell *cell = (PhotoCell *)[collectionView
-                                    dequeueReusableCellWithReuseIdentifier:reuseIdentifier
-                                    forIndexPath:indexPath];
+    PhotoCell *cell = (PhotoCell *)[collectionView cellForItemAtIndexPath:indexPath];
     PHAsset *asset = self.assetsFetchResults[indexPath.item];
     if (self.selectionMode) {
+        [cell.image setAlpha:0.7];
+        [cell.selectionIcon setHidden:NO];
         [self.selectedPhotos addObject:asset];
-        NSLog(@"selected: %@", cell);
     } else {
         [self viewImageForAsset:asset];
     }
@@ -164,13 +179,11 @@ shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)collectionView:(UICollectionView *)collectionView
 didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    PhotoCell *cell = (PhotoCell *)[collectionView
-                                    dequeueReusableCellWithReuseIdentifier:reuseIdentifier
-                                    forIndexPath:indexPath];
+    PhotoCell *cell = (PhotoCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [cell.image setAlpha:1];
+    [cell.selectionIcon setHidden:YES];
     PHAsset *asset = self.assetsFetchResults[indexPath.item];
-    // change layout
     [self.selectedPhotos removeObject:asset];
-    NSLog(@"deselected: %@", cell);
 }
 
 
@@ -182,6 +195,7 @@ didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
         [sender setTitle:@"Seleziona"];
         for (NSIndexPath *indexPath in [self.collectionView indexPathsForSelectedItems]) {
             [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
+            [self collectionView:self.collectionView didDeselectItemAtIndexPath:indexPath];
         }
         [self.selectedPhotos removeAllObjects];
     } else {
@@ -191,6 +205,53 @@ didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
         [sender setTitle:@"Annulla"];
     }
     self.selectionMode = !self.selectionMode;
+}
+
+
+- (IBAction)openCamera:(UIBarButtonItem *)sender {
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIAlertController *dialog =
+            [UIAlertController alertControllerWithTitle:@"Errore"
+                                                message:@"Questo dipositivo non ha la fotocamera"
+                                         preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action =
+            [UIAlertAction actionWithTitle:@"OK"
+                                     style:UIAlertActionStyleDefault
+                                   handler:nil];
+        [dialog addAction:action];
+        [self presentViewController:dialog animated:YES completion:nil];
+        return;
+    }
+    
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+
+#pragma mark <UIImagePickerControllerDelegate>
+
+- (void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    UIImage *photo = info[UIImagePickerControllerEditedImage];
+    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+        [PHAssetChangeRequest creationRequestForAssetFromImage:photo];
+    } completionHandler:^(BOOL success, NSError * _Nullable error) {
+        if (!success) {
+            NSLog(@"Error: %@, %@", error, error.localizedDescription);
+        }
+    }];
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    [self loadPhotos];
+}
+
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 

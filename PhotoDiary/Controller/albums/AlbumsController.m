@@ -19,7 +19,6 @@
 @interface AlbumsController ()
 
 @property (nonatomic, strong) PHCachingImageManager *imageManager;
-
 @property (nonatomic, strong) NSArray<Album *> *albums;
 
 @end
@@ -97,7 +96,8 @@ static NSString * const reuseIdentifier = @"AlbumCell";
                                     forIndexPath:indexPath];
     Album *album = [self.albums objectAtIndex:indexPath.row];
     [cell.label setText:album.title];
-    [cell.image.layer setCornerRadius:5];
+    cell.image.layer.cornerRadius = 5;
+    cell.image.layer.masksToBounds = YES;
     [cell.elementNumber setText:[NSString stringWithFormat:@"%ld elementi", album.photos.count]];
     if (album.photos.count > 0) {
         NSArray *identifiers = [[NSArray alloc] initWithObjects:[album.photos anyObject].localIdentifier, nil];
@@ -107,6 +107,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
                                     contentMode:PHImageContentModeAspectFill
                                         options:nil
                                   resultHandler:^(UIImage *result, NSDictionary *info) {
+                                      //NSLog(@"set image to album %@", album.title);
                                       cell.image.image = result;
                                   }];
     } else {

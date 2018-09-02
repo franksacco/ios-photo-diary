@@ -8,13 +8,16 @@
 
 #import "AlbumPhotoController.h"
 #import "AlbumPhotoDetailsController.h"
+#import <FBSDKShareKit/FBSDKShareKit.h>
 
 
 @interface AlbumPhotoController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property PHAsset *asset;
+@property UIImage *image;
+
+- (IBAction)shareClicked:(UIBarButtonItem *)sender;
 
 @end
 
@@ -24,16 +27,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self.scrollView setDelegate:self];
     [self.scrollView setMaximumZoomScale:4];
 }
 
 
-- (void)setImage:(UIImage *)image withAsset:(PHAsset *)asset {
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.albumPhoto.localIdentifier == nil) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+
+- (void)showImage:(UIImage *)image {
+    self.image = image;
     [self.imageView setImage:image];
-    self.asset = asset;
-    
     [self.scrollView setMinimumZoomScale:
      self.scrollView.frame.size.width / self.imageView.frame.size.width];
     [self.scrollView setContentSize:
@@ -57,10 +66,22 @@
     if ([segue.identifier isEqualToString:@"showAlbumPhotoDetails"]) {
         if ([segue.destinationViewController isKindOfClass:[AlbumPhotoDetailsController class]]) {
             AlbumPhotoDetailsController *cv = segue.destinationViewController;
+            cv.albumPhoto = self.albumPhoto;
             cv.asset = self.asset;
-            NSLog(@"asset sent: %@", self.asset);
         }
     }
+}
+
+
+- (IBAction)shareClicked:(UIBarButtonItem *)sender {
+    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+    photo.image = self.image;
+    photo.userGenerated = YES;
+    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+    content.photos = @[photo];
+    [FBSDKShareDialog showFromViewController:self
+                                 withContent:content
+                                    delegate:nil];
 }
 
 

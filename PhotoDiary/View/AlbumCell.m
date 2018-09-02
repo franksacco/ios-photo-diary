@@ -8,6 +8,7 @@
 
 #import "AlbumCell.h"
 
+
 @implementation AlbumCell
 
 @end

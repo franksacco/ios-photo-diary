@@ -7,6 +7,7 @@
 //
 
 #import "EditAlbumController.h"
+#import "AlbumPhotosController.h"
 #import "Album+CoreDataClass.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -16,10 +17,13 @@
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITextView *descTextView;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)save:(id)sender;
 - (IBAction)delete:(UIButton *)sender;
+- (IBAction)titleChanged:(UITextField *)sender;
+- (IBAction)hideKeyboard:(id)sender;
 
 @end
 
@@ -39,12 +43,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     if (self.album) {
         self.title = @"Modifica album";
         [self.titleTextField setText:self.album.title];
         [self.descTextView setText:self.album.desc];
+        self.saveButton.enabled = YES;
     } else {
+        self.saveButton.enabled = NO;
         self.deleteButton.hidden = YES;
     }
 }
@@ -79,9 +84,7 @@
     album.desc = self.descTextView.text;
     
     NSError *error = nil;
-    if ([context save:&error]) {
-        NSLog(@"Album saved");
-    } else {
+    if (![context save:&error]) {
         NSLog(@"Error: %@ %@", error, [error localizedDescription]);
     }
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -96,7 +99,7 @@
     
     UIAlertAction *confirmAction =
         [UIAlertAction actionWithTitle:@"Conferma"
-                                 style:UIAlertActionStyleDefault
+                                 style:UIAlertActionStyleDestructive
                                handler:^(UIAlertAction * _Nonnull action) {
                                    [self deleteAlbum];
                                }];
@@ -117,7 +120,22 @@
     if (![context save:&error]) {
         NSLog(@"Deleting error: %@ %@", error, [error localizedDescription]);
     }
+    self.album.title = nil;
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (IBAction)titleChanged:(UITextField *)sender {
+    if ([sender.text length] == 0) {
+        self.saveButton.enabled = NO;
+    } else {
+        self.saveButton.enabled = YES;
+    }
+}
+
+
+- (IBAction)hideKeyboard:(id)sender {
+    [self.titleTextField resignFirstResponder];
 }
 
 

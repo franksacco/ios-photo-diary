@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface PhotoCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *image;
+@property (weak, nonatomic) IBOutlet UIImageView *selectionIcon;
 
 @end

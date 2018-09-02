@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Album+CoreDataClass.h"
 
+
 @interface AlbumPhotosController : UICollectionViewController
 
-@property (nonatomic, strong) Album *album;
+@property Album *album;
 
 @end

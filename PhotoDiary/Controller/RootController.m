@@ -8,17 +8,12 @@
 
 #import "RootController.h"
 
+
 @implementation RootController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
-
-
-- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
-    //NSInteger tag = item.tag;
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

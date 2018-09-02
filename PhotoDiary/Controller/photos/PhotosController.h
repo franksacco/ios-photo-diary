@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 
-@interface PhotosController : UICollectionViewController
+@interface PhotosController : UICollectionViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @end

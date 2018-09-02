@@ -8,13 +8,17 @@
 
 #import "PhotoController.h"
 #import "PhotoDetailsController.h"
+#import <FBSDKShareKit/FBSDKShareKit.h>
 
 
 @interface PhotoController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property UIImage *image;
 @property PHAsset *asset;
+
+- (IBAction)shareClicked:(UIBarButtonItem *)sender;
 
 @end
 
@@ -31,9 +35,9 @@
 
 
 - (void)setImage:(UIImage *)image withAsset:(PHAsset *)asset {
-    [self.imageView setImage:image];
+    self.image = image;
     self.asset = asset;
-    
+    [self.imageView setImage:image];
     [self.scrollView setMinimumZoomScale:
         self.scrollView.frame.size.width / self.imageView.frame.size.width];
     [self.scrollView setContentSize:
@@ -60,6 +64,18 @@
             cv.asset = self.asset;
         }
     }
+}
+
+
+- (IBAction)shareClicked:(UIBarButtonItem *)sender {
+    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+    photo.image = self.image;
+    photo.userGenerated = YES;
+    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+    content.photos = @[photo];
+    [FBSDKShareDialog showFromViewController:self
+                                 withContent:content
+                                    delegate:nil];
 }
 
 

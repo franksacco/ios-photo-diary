@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface AlbumPhotoCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *image;

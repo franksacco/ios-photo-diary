@@ -15,13 +15,14 @@
 		F6182288212C100D00BDBBF1 /* PhotoDiaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F6182287212C100D00BDBBF1 /* PhotoDiaryTests.m */; };
 		F6182293212C100D00BDBBF1 /* PhotoDiaryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F6182292212C100D00BDBBF1 /* PhotoDiaryUITests.m */; };
 		F6520A952130A81600BD2EFF /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6520A942130A81600BD2EFF /* PhotoCell.m */; };
+		F67124792137E91500940794 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F67124782137E91500940794 /* LaunchScreen.storyboard */; };
+		F671247B213AD24100940794 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F671247A213AD24000940794 /* FBSDKShareKit.framework */; };
 		F6A0317D213434550041006A /* AlbumPhotosController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A0317C213434550041006A /* AlbumPhotosController.m */; };
 		F6A03180213442380041006A /* AlbumPhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A0317F213442380041006A /* AlbumPhotoController.m */; };
 		F6A03183213556D00041006A /* AddToAlbumController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A03182213556D00041006A /* AddToAlbumController.m */; };
 		F6A031892135C8210041006A /* PhotoDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A031882135C8200041006A /* PhotoDetailsController.m */; };
 		F6A0318C2135F21D0041006A /* AlbumPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A0318B2135F21D0041006A /* AlbumPhotoCell.m */; };
 		F6A2FED52132CD1100121D35 /* PhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A2FED42132CD1100121D35 /* PhotoController.m */; };
-		F6A861DA212DC73900B4920F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F6A861D9212DC73800B4920F /* libsqlite3.tbd */; };
 		F6AF246D212EA35100F974C3 /* PhotosController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6AF246C212EA35100F974C3 /* PhotosController.m */; };
 		F6B1C50D21303CEA00A9103E /* AlbumsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1C50C21303CEA00A9103E /* AlbumsController.m */; };
 		F6B1C50F2130521B00A9103E /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B1C50E2130521B00A9103E /* Photos.framework */; };
@@ -66,6 +67,8 @@
 		F6182294212C100D00BDBBF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6520A9121307B1A00BD2EFF /* PhotoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		F6520A942130A81600BD2EFF /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
+		F67124782137E91500940794 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F671247A213AD24000940794 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "FacebookSDKs-iOS-4/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		F6A0317B213434550041006A /* AlbumPhotosController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumPhotosController.h; sourceTree = "<group>"; };
 		F6A0317C213434550041006A /* AlbumPhotosController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumPhotosController.m; sourceTree = "<group>"; };
 		F6A0317E213442380041006A /* AlbumPhotoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumPhotoController.h; sourceTree = "<group>"; };
@@ -98,8 +101,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F671247B213AD24100940794 /* FBSDKShareKit.framework in Frameworks */,
 				F6B1C50F2130521B00A9103E /* Photos.framework in Frameworks */,
-				F6A861DA212DC73900B4920F /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +222,7 @@
 		F6A861D8212DC73800B4920F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F671247A213AD24000940794 /* FBSDKShareKit.framework */,
 				F6B1C50E2130521B00A9103E /* Photos.framework */,
 				F6A861D9212DC73800B4920F /* libsqlite3.tbd */,
 			);
@@ -237,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				F6182274212C100900BDBBF1 /* Main.storyboard */,
+				F67124782137E91500940794 /* LaunchScreen.storyboard */,
 				F6182277212C100C00BDBBF1 /* Assets.xcassets */,
 				F6520A9121307B1A00BD2EFF /* PhotoCell.h */,
 				F6520A942130A81600BD2EFF /* PhotoCell.m */,
@@ -351,6 +356,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F67124792137E91500940794 /* LaunchScreen.storyboard in Resources */,
 				F6182278212C100C00BDBBF1 /* Assets.xcassets in Resources */,
 				F6182276212C100900BDBBF1 /* Main.storyboard in Resources */,
 			);
@@ -554,6 +560,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FacebookSDKs-iOS-4",
+				);
 				INFOPLIST_FILE = PhotoDiary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -562,7 +572,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = franksacco.PhotoDiary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -571,6 +581,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FacebookSDKs-iOS-4",
+				);
 				INFOPLIST_FILE = PhotoDiary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -579,7 +593,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = franksacco.PhotoDiary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

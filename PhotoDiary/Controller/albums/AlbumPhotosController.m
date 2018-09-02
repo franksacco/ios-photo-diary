@@ -12,12 +12,13 @@
 #import "AlbumPhotoCell.h"
 #import "AlbumPhoto+CoreDataClass.h"
 #import <Photos/Photos.h>
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface AlbumPhotosController ()
 
-@property (nonatomic, strong) PHFetchResult *assetsFetchResults;
 @property (nonatomic, strong) PHCachingImageManager *imageManager;
+@property (nonatomic, strong) PHFetchResult *assetsFetchResults;
 
 @end
 
@@ -27,8 +28,17 @@
 static NSString * const reuseIdentifier = @"AlbumPhotoCell";
 
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.imageManager = [[PHCachingImageManager alloc] init];
+}
+
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if (self.album.title == nil) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
     
     self.title = self.album.title;
     
@@ -37,10 +47,7 @@ static NSString * const reuseIdentifier = @"AlbumPhotoCell";
     for (AlbumPhoto *photo in albumPhotos) {
         [identifiers addObject:photo.localIdentifier];
     }
-    PHFetchOptions *options = [[PHFetchOptions alloc] init];
-    options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
-    self.assetsFetchResults = [PHAsset fetchAssetsWithLocalIdentifiers:identifiers options:options];
-    self.imageManager = [[PHCachingImageManager alloc] init];
+    self.assetsFetchResults = [PHAsset fetchAssetsWithLocalIdentifiers:identifiers options:nil];
     NSLog(@"%td images founded", self.assetsFetchResults.count);
     
     [self.collectionView reloadData];
@@ -59,14 +66,24 @@ static NSString * const reuseIdentifier = @"AlbumPhotoCell";
     if ([segue.identifier isEqualToString:@"showAlbumPhoto"]) {
         if ([segue.destinationViewController isKindOfClass:[AlbumPhotoController class]]) {
             NSIndexPath *index = [self.collectionView indexPathForCell:(AlbumPhotoCell *)sender];
+            
             PHAsset *asset = [self.assetsFetchResults objectAtIndex:index.row];
+            AlbumPhoto *albumPhoto;
+            for (albumPhoto in [self.album.photos allObjects]) {
+                if ([albumPhoto.localIdentifier isEqualToString:asset.localIdentifier]) {
+                    break;
+                }
+            }
+            
             AlbumPhotoController *cv = [segue destinationViewController];
+            cv.asset = asset;
+            cv.albumPhoto = albumPhoto;
             [self.imageManager requestImageForAsset:asset
                                          targetSize:PHImageManagerMaximumSize
                                         contentMode:PHImageContentModeDefault
                                             options:nil
                                       resultHandler:^(UIImage *result, NSDictionary *info) {
-                                          [cv setImage:result withAsset:asset];
+                                          [cv showImage:result];
                                       }];
         }
     } else if ([segue.identifier isEqualToString:@"showEditAlbum"]) {
@@ -126,12 +143,14 @@ static NSString * const reuseIdentifier = @"AlbumPhotoCell";
         
         UIView *padding = [[UIView alloc] initWithFrame:
                            CGRectMake(16, 16, header.bounds.size.width-32, header.bounds.size.height-32)];
-        UILabel *label = [[UILabel alloc] init];
+        UILabel *label = [[UILabel alloc] initWithFrame:
+                          CGRectMake(0, 0, padding.bounds.size.width, padding.bounds.size.height)];
         [label setText:self.album.desc];
+        label.numberOfLines = 0;
+        label.lineBreakMode = NSLineBreakByWordWrapping;
         label.textColor = [UIColor grayColor];
-        [padding addSubview:label];
-        [label sizeToFit];
         
+        [padding addSubview:label];
         [header addSubview:padding];
         return header;
     }
@@ -142,7 +161,7 @@ static NSString * const reuseIdentifier = @"AlbumPhotoCell";
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout*)collectionViewLayout
 referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(UIScreen.mainScreen.bounds.size.width, 60);
+    return CGSizeMake(UIScreen.mainScreen.bounds.size.width, [self.album.desc length] == 0 ? 0 : 80);
 }
 
 

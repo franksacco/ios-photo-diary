@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
+#import "AlbumPhoto+CoreDataClass.h"
 
 
 @interface AlbumPhotoDetailsController : UITableViewController
 
+@property AlbumPhoto *albumPhoto;
 @property PHAsset *asset;
 
 @end
