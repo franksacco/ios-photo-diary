@@ -50,8 +50,8 @@ static NSString * const reuseIdentifier = @"PhotoCell";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.navigationItem.leftBarButtonItem.title = @"";
-    self.navigationItem.leftBarButtonItem.enabled = NO;
+    self.addToButton.title = @"";
+    self.addToButton.enabled = NO;
     [self.navigationItem setTitle:@"Foto"];
     [self.selectionButton setTitle:@"Seleziona"];
     self.selectionMode = NO;
@@ -189,8 +189,8 @@ didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
 
 - (IBAction)toggleSelectionMode:(UIBarButtonItem *)sender {
     if (self.selectionMode) {
-        self.navigationItem.leftBarButtonItem.title = @"";
-        self.navigationItem.leftBarButtonItem.enabled = NO;
+        self.addToButton.title = @"";
+        self.addToButton.enabled = NO;
         [self.navigationItem setTitle:@"Foto"];
         [sender setTitle:@"Seleziona"];
         for (NSIndexPath *indexPath in [self.collectionView indexPathsForSelectedItems]) {
@@ -199,8 +199,8 @@ didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
         }
         [self.selectedPhotos removeAllObjects];
     } else {
-        self.navigationItem.leftBarButtonItem.title = @"Aggiungi";
-        self.navigationItem.leftBarButtonItem.enabled = YES;
+        self.addToButton.title = @"Aggiungi";
+        self.addToButton.enabled = YES;
         [self.navigationItem setTitle:@"Seleziona foto"];
         [sender setTitle:@"Annulla"];
     }
